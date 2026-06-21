@@ -95,7 +95,7 @@ export default function CompanyDashboardPage() {
 
   return (
     <div className="space-y-8 fade-in">
-      <div className="flex items-start justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div>
           <h1 className="font-syne text-3xl font-bold text-foreground">{company.name}</h1>
           <p className="text-muted-foreground mt-1">{company.industry} · {company.size}</p>

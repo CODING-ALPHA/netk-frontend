@@ -116,7 +116,7 @@ export default function CompanyRolesPage() {
               placeholder="Describe the role, responsibilities, and what you're looking for…"
               className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground placeholder-[#8B949E] focus:border-primary focus:outline-none transition-colors resize-none" />
           </div>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-muted-foreground mb-2">Experience Level</label>
               <select value={form.experienceLevel} onChange={(e) => setForm((f) => ({ ...f, experienceLevel: e.target.value }))}
@@ -186,7 +186,7 @@ export default function CompanyRolesPage() {
       ) : (
         <div className="space-y-4">
           {roles.map((role) => (
-            <div key={role.id} className="bg-card border border-border rounded-xl p-6 flex items-start justify-between gap-6">
+            <div key={role.id} className="bg-card border border-border rounded-xl p-6 flex flex-col sm:flex-row justify-between sm:items-start gap-4">
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-3 mb-2">
                   <h3 className="font-bold text-lg text-foreground">{role.title}</h3>

@@ -62,7 +62,7 @@ export default function ProfilePage() {
              </div>
           </div>
           
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-muted-foreground mb-2">First Name</label>
               <input 

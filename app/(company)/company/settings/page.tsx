@@ -90,7 +90,7 @@ export default function CompanySettingsPage() {
             className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-foreground placeholder-[#8B949E] focus:border-primary focus:outline-none transition-colors" />
         </div>
 
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-medium text-muted-foreground mb-2 flex items-center gap-2">
               <Briefcase size={16} /> Industry

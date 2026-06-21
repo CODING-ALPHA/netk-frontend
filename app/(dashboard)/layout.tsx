@@ -2,12 +2,31 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Home, Briefcase, User, FolderOpen, LogOut, Compass, Building2 } from 'lucide-react';
+import { Home, Briefcase, User, FolderOpen, LogOut, Compass, Building2, Menu, X } from 'lucide-react';
 import React from 'react';
+import api from '@/lib/api';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
+  const [loadingProfile, setLoadingProfile] = React.useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    api.get('/users/me')
+      .then(({ data }) => {
+        if (!data.region) {
+          window.location.href = '/onboarding';
+        } else if (!data.ikigaiProfile) {
+          window.location.href = '/assessment';
+        } else {
+          setLoadingProfile(false);
+        }
+      })
+      .catch(() => {
+        window.location.href = '/sign-in';
+      });
+  }, []);
 
   const navItems = [
     { name: 'Dashboard', href: '/dashboard', icon: Home },
@@ -23,10 +42,18 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     router.push('/sign-in');
   };
 
+  if (loadingProfile) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="w-6.5 h-6.5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
   return (
-    <div className="flex min-h-screen bg-background text-foreground font-sans">
-      {/* Sidebar */}
-      <aside className="w-64 border-r border-border hidden md:flex flex-col">
+    <div className="flex min-h-screen bg-background text-foreground font-sans relative">
+      {/* Sidebar for Desktop */}
+      <aside className="w-64 border-r border-border hidden md:flex flex-col shrink-0">
         <div className="h-16 flex items-center px-6 border-b border-border">
           <Link href="/dashboard" className="font-syne text-primary text-2xl font-bold">
             NetK
@@ -63,19 +90,83 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </div>
       </aside>
 
+      {/* Mobile Sidebar Overlay Drawer */}
+      {isSidebarOpen && (
+        <div className="fixed inset-0 z-50 flex md:hidden bg-background/85 backdrop-blur-sm">
+          <div className="w-64 bg-card border-r border-border flex flex-col h-full shadow-2xl animate-fade-in">
+            <div className="h-16 flex items-center justify-between px-6 border-b border-border">
+              <Link href="/dashboard" className="font-syne text-primary text-2xl font-bold" onClick={() => setIsSidebarOpen(false)}>
+                NetK
+              </Link>
+              <button
+                onClick={() => setIsSidebarOpen(false)}
+                className="p-1 text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="Close menu"
+              >
+                <X size={24} />
+              </button>
+            </div>
+            <nav className="flex-1 px-4 py-6 space-y-2">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setIsSidebarOpen(false)}
+                    className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
+                      isActive 
+                        ? 'bg-primary/10 text-primary border border-primary/20' 
+                        : 'text-muted-foreground hover:text-foreground hover:bg-card'
+                    }`}
+                  >
+                    <Icon size={20} />
+                    <span className="font-medium text-sm">{item.name}</span>
+                  </Link>
+                );
+              })}
+            </nav>
+            <div className="p-4 border-t border-border">
+              <button
+                onClick={() => {
+                  setIsSidebarOpen(false);
+                  handleSignOut();
+                }}
+                className="flex w-full items-center gap-3 px-3 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-card transition-colors"
+              >
+                <LogOut size={20} />
+                <span className="font-medium text-sm">Sign Out</span>
+              </button>
+            </div>
+          </div>
+          {/* Backdrop area to close drawer */}
+          <div className="flex-1" onClick={() => setIsSidebarOpen(false)} />
+        </div>
+      )}
+
       {/* Main Content */}
       <main className="flex-1 flex flex-col h-screen overflow-hidden">
-        <header className="h-16 border-b border-border flex items-center px-8 md:px-12 bg-background/80 backdrop-blur z-10 sticky top-0 justify-between">
-          <h2 className="font-syne font-semibold text-lg text-foreground capitalize">
-            {pathname.split('/').pop() || 'Dashboard'}
-          </h2>
+        <header className="h-16 border-b border-border flex items-center px-6 md:px-12 bg-background/80 backdrop-blur z-10 sticky top-0 justify-between">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setIsSidebarOpen(true)}
+              className="md:hidden p-1.5 text-muted-foreground hover:text-foreground transition-colors border border-border rounded-lg bg-card"
+              aria-label="Open menu"
+            >
+              <Menu size={20} />
+            </button>
+            <h2 className="font-syne font-semibold text-lg text-foreground capitalize">
+              {pathname.split('/').pop() || 'Dashboard'}
+            </h2>
+          </div>
           <div className="flex items-center gap-4">
              <div className="w-8 h-8 rounded-full bg-card border border-border flex items-center justify-center">
                 <User size={16} className="text-muted-foreground" />
              </div>
           </div>
         </header>
-        <div className="flex-1 overflow-y-auto p-8 md:p-12">
+        <div className="flex-1 overflow-y-auto p-6 md:p-12">
           <div className="max-w-5xl mx-auto pb-20">
             {children}
           </div>

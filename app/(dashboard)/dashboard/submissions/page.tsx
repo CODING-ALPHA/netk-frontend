@@ -27,7 +27,9 @@ export default function SubmissionsPage() {
     api.get('/submissions/me').then(async ({ data }) => {
       setSubmissions(data);
 
-      const uniqueTaskIds: string[] = [...new Set<string>(data.map((s: any) => s.taskId))];
+      const uniqueTaskIds: string[] = data
+        .map((s: any) => s.taskId)
+        .filter((value: string, index: number, self: string[]) => self.indexOf(value) === index);
       const tasks = await Promise.all(
         uniqueTaskIds.map((id) =>
           api.get(`/tasks/${id}`).then((r) => ({ id, title: r.data.title })).catch(() => ({ id, title: id }))
@@ -63,7 +65,7 @@ export default function SubmissionsPage() {
           submissions.map((sub) => (
             <div
               key={sub.id}
-              className="bg-card border border-border p-6 rounded-xl flex items-center justify-between hover:border-primary/50 transition-colors"
+              className="bg-card border border-border p-6 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-primary/50 transition-colors"
             >
               <div>
                 <h3 className="font-semibold text-lg mb-1">{taskMap[sub.taskId] || 'Task'}</h3>

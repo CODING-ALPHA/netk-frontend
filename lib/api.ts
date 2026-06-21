@@ -19,6 +19,18 @@ api.interceptors.request.use((config) => {
 });
 
 let isRefreshing = false;
+let failedQueue: any[] = [];
+
+const processQueue = (error: any) => {
+  failedQueue.forEach((prom) => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      prom.resolve(api(prom.config));
+    }
+  });
+  failedQueue = [];
+};
 
 api.interceptors.response.use(
   (response) => response,
@@ -33,9 +45,16 @@ api.interceptors.response.use(
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&
-      !isRefreshing &&
       !isAuthEndpoint
     ) {
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          failedQueue.push({ resolve, reject, config: originalRequest });
+        }).catch((err) => {
+          return Promise.reject(err);
+        });
+      }
+
       originalRequest._retry = true;
       isRefreshing = true;
 
@@ -43,13 +62,15 @@ api.interceptors.response.use(
         const res = await fetch('/api/auth/refresh', { method: 'POST' });
         if (res.ok) {
           isRefreshing = false;
+          processQueue(null);
           return api(originalRequest);
         }
       } catch {
-        // fall through to redirect
+        // fall through
       }
 
       isRefreshing = false;
+      processQueue(error);
       await fetch('/api/auth/logout', { method: 'POST' });
       if (typeof window !== 'undefined') {
         window.location.href = '/sign-in';

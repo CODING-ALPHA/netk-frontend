@@ -39,9 +39,9 @@ export default function LandingPage() {
 
       <main className="">
         {/* Hero Wrapper */}
-        <div className="relative min-h-screen overflow-hidden">
+        <div className="relative min-h-screen flex flex-col justify-center overflow-hidden">
           {/* Hero Content */}
-          <section className="absolute top-1/2 -translate-y-1/2 left-0 px-8 w-full md:px-[8%] z-10">
+          <section className="relative px-8 md:px-[8%] pt-32 pb-24 z-10 w-full">
             <h1 className="text-[clamp(2.5rem,5vw,5.5rem)] font-black uppercase tracking-tighter mb-8 leading-[0.9]">
               Moving Careers <br/>
               <span className="text-white">Forward</span>

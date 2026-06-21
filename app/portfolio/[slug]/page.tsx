@@ -32,23 +32,23 @@ export default function PublicPortfolioPage() {
 
       <main className="max-w-4xl mx-auto px-6 py-16 space-y-12">
          <div className="flex flex-col md:flex-row items-start gap-8">
-            <div className="w-24 h-24 rounded-full bg-card border-2 border-primary flex items-center justify-center font-syne font-bold text-3xl text-primary">
-               {portfolio.profile.firstName?.[0] || ''}{portfolio.profile.lastName?.[0] || ''}
+            <div className="w-24 h-24 rounded-full bg-card border-2 border-primary flex items-center justify-center font-syne font-bold text-3xl text-primary shrink-0">
+               {portfolio.user.firstName?.[0] || ''}{portfolio.user.lastName?.[0] || ''}
             </div>
             <div>
                <h1 className="font-syne text-4xl md:text-5xl font-bold mb-3">
-                  {portfolio.profile.firstName} {portfolio.profile.lastName}
+                  {portfolio.user.firstName} {portfolio.user.lastName}
                </h1>
                <div className="flex flex-wrap items-center gap-4 text-muted-foreground text-sm">
-                  {portfolio.profile.region && (
-                    <span className="flex items-center gap-1.5"><MapPin size={16}/> {portfolio.profile.region}</span>
+                  {portfolio.user.region && (
+                    <span className="flex items-center gap-1.5"><MapPin size={16}/> {portfolio.user.region}</span>
                   )}
                   {portfolio.activePath?.title && (
                     <span className="flex items-center gap-1.5 text-primary"><Briefcase size={16}/> {portfolio.activePath.title} Path</span>
                   )}
                </div>
                <p className="mt-6 text-lg leading-relaxed max-w-2xl">
-                  {portfolio.profile.bio || 'An aspiring professional building their career through verified skills and real-world task submissions on NetK.'}
+                  {portfolio.user.bio || 'An aspiring professional building their career through verified skills and real-world task submissions on NetK.'}
                </p>
             </div>
          </div>
@@ -59,19 +59,21 @@ export default function PublicPortfolioPage() {
             </h2>
             
             <div className="space-y-6">
-               {portfolio.submissions.length === 0 ? (
+               {portfolio.artifacts.length === 0 ? (
                   <div className="text-center py-12 bg-card/50 rounded-xl border border-border/50 text-muted-foreground">
                      No approved submissions yet.
                   </div>
                ) : (
-                  portfolio.submissions.map((sub: any) => (
-                     <div key={sub._id} className="bg-card border border-border rounded-xl p-8 hover:border-primary/50 transition-colors">
-                        <h3 className="text-xl font-bold text-foreground mb-4">Task: {sub.taskId}</h3>
-                        <p className="text-muted-foreground leading-relaxed break-words whitespace-pre-wrap">
-                           {sub.content}
-                        </p>
-                        {sub.repoUrl && (
-                           <a href={sub.repoUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 mt-6 text-primary hover:underline">
+                  portfolio.artifacts.map((art: any) => (
+                     <div key={art.id} className="bg-card border border-border rounded-xl p-8 hover:border-primary/50 transition-colors">
+                        <h3 className="text-xl font-bold text-foreground mb-4">Task: {art.title}</h3>
+                        {art.textResponse && (
+                          <p className="text-muted-foreground leading-relaxed break-words whitespace-pre-wrap">
+                             {art.textResponse}
+                          </p>
+                        )}
+                        {art.evidenceLinks?.[0] && (
+                           <a href={art.evidenceLinks[0]} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 mt-6 text-primary hover:underline">
                               <LinkIcon size={16} /> View External Repository
                            </a>
                         )}

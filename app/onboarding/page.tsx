@@ -228,7 +228,7 @@ export default function OnboardingPage() {
               <label className="block text-sm font-medium text-foreground mb-3">
                 Experience Level
               </label>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {EXPERIENCE_LEVELS.map(({ value, desc }) => {
                   const selected = form.experienceLevel === value;
                   return (

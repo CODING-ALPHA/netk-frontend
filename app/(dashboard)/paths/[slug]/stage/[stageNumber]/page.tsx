@@ -13,6 +13,10 @@ interface Task {
   deliverables: string[];
   acceptanceCriteria: string[];
   difficulty: number;
+  expectedOutput?: string;
+  skillsExercised: string[];
+  suggestedTools: string[];
+  presentationTips?: string;
   status: string;
 }
 
@@ -151,7 +155,7 @@ export default function StagePage() {
             return (
               <div key={task.id} className="bg-card border border-border rounded-2xl overflow-hidden">
                 <div className="p-6">
-                  <div className="flex items-start justify-between gap-4 mb-4">
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
                         <h3 className="font-bold text-lg text-foreground">{task.title}</h3>
@@ -193,6 +197,51 @@ export default function StagePage() {
                           </li>
                         ))}
                       </ul>
+                    </div>
+                  )}
+
+                  {task.expectedOutput && (
+                    <div className="mb-4">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Expected Output</p>
+                      <p className="text-sm text-foreground leading-relaxed">{task.expectedOutput}</p>
+                    </div>
+                  )}
+
+                  {((task.skillsExercised && task.skillsExercised.length > 0) || (task.suggestedTools && task.suggestedTools.length > 0)) && (
+                    <div className="mb-4 flex flex-wrap gap-6">
+                      {task.skillsExercised && task.skillsExercised.length > 0 && (
+                        <div>
+                          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Skills Exercised</p>
+                          <div className="flex flex-wrap gap-1.5">
+                            {task.skillsExercised.map((s) => (
+                              <span key={s} className="px-2.5 py-0.5 bg-primary/10 text-primary rounded-md text-[10px] font-bold uppercase tracking-wider border border-primary/20">
+                                {s}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      {task.suggestedTools && task.suggestedTools.length > 0 && (
+                        <div>
+                          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Suggested Tools</p>
+                          <div className="flex flex-wrap gap-1.5">
+                            {task.suggestedTools.map((t) => (
+                              <span key={t} className="px-2.5 py-0.5 bg-[#21262D] text-foreground rounded-md text-[10px] font-bold uppercase tracking-wider border border-border">
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {task.presentationTips && (
+                    <div className="mb-6 p-4 bg-primary/5 border border-primary/20 rounded-xl">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-primary mb-1.5 flex items-center gap-1.5">
+                        💡 Presentation Tip
+                      </p>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{task.presentationTips}</p>
                     </div>
                   )}
 
