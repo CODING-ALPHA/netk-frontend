@@ -1,6 +1,11 @@
+'use client';
 import Link from 'next/link';
+import { useState } from 'react';
+import { Menu, X } from 'lucide-react';
 
 export default function LandingPage() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary/30 selection:text-primary">
       {/* Navigation */}
@@ -13,14 +18,14 @@ export default function LandingPage() {
             <span className="text-xl font-black uppercase tracking-tighter">NetK</span>
           </div>
 
-          <div className="hidden lg:flex items-center gap-10 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
+          <div className="hidden md:flex items-center gap-10 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
             <Link href="#ikigai" className="hover:text-primary transition-colors">Ikigai</Link>
             <Link href="#roadmap" className="hover:text-primary transition-colors">Roadmap</Link>
             <Link href="#tasks" className="hover:text-primary transition-colors">Proofs</Link>
             <Link href="#hiring" className="hover:text-primary transition-colors">Hiring</Link>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-6">
             <div className="hidden sm:flex items-center gap-2 text-[10px] font-black uppercase tracking-widest border border-border px-3 py-1.5 rounded-full">
               <span className="opacity-50">Lang</span> EN
             </div>
@@ -34,7 +39,38 @@ export default function LandingPage() {
               </svg>
             </Link>
           </div>
+
+          {/* Mobile Menu Toggle */}
+          <button 
+            className="md:hidden p-2 text-foreground"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
+
+        {/* Mobile Menu Dropdown */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden absolute top-20 left-0 w-full bg-background border-b border-border/40 px-6 py-4 flex flex-col gap-4 shadow-xl">
+            <Link href="#ikigai" className="text-sm font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-primary py-2" onClick={() => setIsMobileMenuOpen(false)}>Ikigai</Link>
+            <Link href="#roadmap" className="text-sm font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-primary py-2" onClick={() => setIsMobileMenuOpen(false)}>Roadmap</Link>
+            <Link href="#tasks" className="text-sm font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-primary py-2" onClick={() => setIsMobileMenuOpen(false)}>Proofs</Link>
+            <Link href="#hiring" className="text-sm font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-primary py-2" onClick={() => setIsMobileMenuOpen(false)}>Hiring</Link>
+            <div className="pt-4 border-t border-border/40">
+              <Link
+                href="/onboarding"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full px-6 py-3 bg-white text-black text-xs font-black uppercase tracking-widest rounded-full hover:bg-primary transition-all shadow-2xl flex items-center justify-center gap-2"
+              >
+                Get Started
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        )}
       </nav>
 
       <main className="">
