@@ -12,8 +12,13 @@ export async function POST(req: NextRequest) {
   if (!refreshToken) return clearCookiesAndReturn401();
 
   try {
+    let baseUrl = process.env.NEXT_PUBLIC_API_URL || '';
+    if (baseUrl && !baseUrl.startsWith('http://') && !baseUrl.startsWith('https://')) {
+      baseUrl = `https://${baseUrl}`;
+    }
+
     const backendRes = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`,
+      `${baseUrl}/auth/refresh`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
