@@ -9,16 +9,16 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary/30 selection:text-primary">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 w-full z-50 border-b border-border/40 bg-background/80 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl z-50 border border-border/40 bg-background/80 backdrop-blur-xl transition-all duration-300">
+        <div className="px-6 w-full h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-primary rounded flex items-center justify-center font-bold text-black text-xl">
+            <div className="w-8 h-8 bg-primary rounded flex items-center justify-center font-bold text-black text-lg">
               N
             </div>
-            <span className="text-xl font-black uppercase tracking-tighter">NetK</span>
+            <span className="text-lg font-black uppercase tracking-tighter">NetK</span>
           </div>
 
-          <div className="hidden md:flex items-center gap-10 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
+          <div className="hidden md:flex items-center gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
             <Link href="#ikigai" className="hover:text-primary transition-colors">Ikigai</Link>
             <Link href="#roadmap" className="hover:text-primary transition-colors">Roadmap</Link>
             <Link href="#tasks" className="hover:text-primary transition-colors">Proofs</Link>
@@ -26,12 +26,9 @@ export default function LandingPage() {
           </div>
 
           <div className="hidden md:flex items-center gap-6">
-            <div className="hidden sm:flex items-center gap-2 text-[10px] font-black uppercase tracking-widest border border-border px-3 py-1.5 rounded-full">
-              <span className="opacity-50">Lang</span> EN
-            </div>
             <Link
               href="/onboarding"
-              className="px-6 py-3 bg-white text-black text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-primary transition-all active:scale-95 shadow-2xl flex items-center gap-2"
+              className="px-5 py-2.5 bg-white text-black text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-primary transition-all active:scale-95 shadow-2xl flex items-center gap-2"
             >
               Get Started
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -46,13 +43,13 @@ export default function LandingPage() {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
 
         {/* Mobile Menu Dropdown */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-20 left-0 w-full bg-background border-b border-border/40 px-6 py-4 flex flex-col gap-4 shadow-xl">
+          <div className="md:hidden absolute top-[calc(100%-1px)] left-[-1px] w-[calc(100%+2px)] bg-background/95 backdrop-blur-xl border-x border-b border-border/40 px-6 py-6 flex flex-col gap-4 shadow-xl">
             <Link href="#ikigai" className="text-sm font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-primary py-2" onClick={() => setIsMobileMenuOpen(false)}>Ikigai</Link>
             <Link href="#roadmap" className="text-sm font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-primary py-2" onClick={() => setIsMobileMenuOpen(false)}>Roadmap</Link>
             <Link href="#tasks" className="text-sm font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-primary py-2" onClick={() => setIsMobileMenuOpen(false)}>Proofs</Link>
@@ -76,8 +73,16 @@ export default function LandingPage() {
       <main className="">
         {/* Hero Wrapper */}
         <div className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+          {/* Animated Background Image */}
+          <div 
+            className="absolute inset-0 bg-[url('/images/hero.png')] bg-cover bg-center bg-no-repeat animate-slow-zoom z-0"
+            style={{ willChange: 'transform' }}
+          />
+          {/* Overlay to ensure text readability */}
+          <div className="absolute inset-0 bg-black/80 z-10" />
+          
           {/* Hero Content */}
-          <section className="relative px-8 md:px-[8%] pt-32 pb-24 z-10 w-full">
+          <section className="relative px-8 md:px-[8%] pt-32 pb-24 z-20 w-full">
             <h1 className="text-[clamp(2.5rem,5vw,5.5rem)] font-black uppercase tracking-tighter mb-8 leading-[0.9]">
               Moving Careers <br/>
               <span className="text-white">Forward</span>
@@ -110,7 +115,7 @@ export default function LandingPage() {
           </section>
 
           {/* Hero Footer Meta */}
-          <div className="absolute bottom-10 left-8 md:left-[8%] right-8 md:right-[8%] flex justify-between items-end z-10 w-auto">
+          <div className="absolute bottom-10 left-8 md:left-[8%] right-8 md:right-[8%] flex justify-between items-end z-20 w-auto">
              <div className="flex flex-col gap-4">
                <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground w-max cursor-pointer group">
                   <span className="group-hover:text-primary transition-colors">Scroll for more</span>
