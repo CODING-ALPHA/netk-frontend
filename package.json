@@ -1,1 +1,15 @@
-{}
+{
+  "name": "net-k",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace=frontend"
+  },
+  "dependencies": {
+    "next": "^14.2.3"
+  }
+}
