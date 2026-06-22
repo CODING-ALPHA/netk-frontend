@@ -2,11 +2,11 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Home, Briefcase, User, FolderOpen, LogOut, Compass, Building2, Menu, X, Mail, ChevronLeft, ChevronRight } from 'lucide-react';
+import { LogOut, LayoutDashboard, Menu, X, CheckSquare, Briefcase, ChevronLeft, ChevronRight } from 'lucide-react';
 import React from 'react';
 import api from '@/lib/api';
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const [loadingProfile, setLoadingProfile] = React.useState(true);
@@ -16,10 +16,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   React.useEffect(() => {
     api.get('/users/me')
       .then(({ data }) => {
-        if (!data.region) {
-          window.location.href = '/onboarding';
-        } else if (!data.ikigaiProfile) {
-          window.location.href = '/assessment';
+        if (data.role !== 'admin') {
+          router.push('/dashboard');
         } else {
           setLoadingProfile(false);
         }
@@ -27,16 +25,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       .catch(() => {
         window.location.href = '/sign-in';
       });
-  }, []);
+  }, [router]);
 
   const navItems = [
-    { name: 'Dashboard', href: '/dashboard', icon: Home },
-    { name: 'Inbox', href: '/inbox', icon: Mail },
-    { name: 'My Submissions', href: '/dashboard/submissions', icon: FolderOpen },
-    { name: 'Portfolio', href: '/dashboard/portfolio', icon: Briefcase },
-    { name: 'Profile', href: '/dashboard/profile', icon: User },
-    { name: 'Career Paths', href: '/paths', icon: Compass },
-    { name: 'Browse Roles', href: '/roles', icon: Building2 },
+    { name: 'Admin Dashboard', href: '/admin', icon: LayoutDashboard },
+    { name: 'Review Submissions', href: '/admin', icon: CheckSquare },
+    { name: 'Manage Roles', href: '/admin/roles', icon: Briefcase },
   ];
 
   const handleSignOut = async () => {
@@ -47,25 +41,24 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   if (loadingProfile) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="w-6.5 h-6.5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+        <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
   return (
     <div className="flex min-h-screen bg-background text-foreground font-sans relative">
-      {/* Sidebar for Desktop */}
-      <aside className={`border-r border-border hidden md:flex flex-col shrink-0 transition-all duration-300 ${isDesktopCollapsed ? 'w-20' : 'w-64'}`}>
-        <div className={`h-16 flex items-center border-b border-border ${isDesktopCollapsed ? 'justify-center flex-col py-2' : 'px-4 justify-between'}`}>
+      <aside className={`border-r border-border hidden md:flex flex-col bg-card/50 shrink-0 transition-all duration-300 ${isDesktopCollapsed ? 'w-20' : 'w-64'}`}>
+        <div className={`p-4 border-b border-border flex items-center ${isDesktopCollapsed ? 'justify-center flex-col py-3' : 'justify-between'}`}>
           {!isDesktopCollapsed && (
-            <Link href="/dashboard" className="font-syne text-primary text-2xl font-bold pl-2">
-              NetK
+            <Link href="/admin" className="font-syne text-primary text-2xl font-bold flex items-center gap-2">
+              NetK <span className="bg-primary/10 text-primary text-[10px] uppercase tracking-wider px-2 py-0.5 rounded border border-primary/20 relative top-[-4px]">Admin</span>
             </Link>
           )}
           <button
             onClick={() => setIsDesktopCollapsed(!isDesktopCollapsed)}
             title={isDesktopCollapsed ? "Expand Menu" : "Collapse Menu"}
-            className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-card transition-colors"
+            className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-[#21262D] transition-colors"
           >
             {isDesktopCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
           </button>
@@ -81,8 +74,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 title={isDesktopCollapsed ? item.name : undefined}
                 className={`flex items-center ${isDesktopCollapsed ? 'justify-center px-0' : 'gap-3 px-3'} py-2 rounded-lg transition-colors ${
                   isActive 
-                    ? 'bg-card text-primary border border-border' 
-                    : 'text-muted-foreground hover:text-foreground hover:bg-card'
+                    ? 'bg-primary/10 text-primary' 
+                    : 'text-muted-foreground hover:text-foreground hover:bg-[#21262D]'
                 }`}
               >
                 <Icon size={20} className="shrink-0" />
@@ -92,29 +85,23 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           })}
         </nav>
         <div className="p-4 border-t border-border flex flex-col gap-2">
-          <button
-            onClick={handleSignOut}
-            title={isDesktopCollapsed ? "Sign Out" : undefined}
-            className={`flex w-full items-center ${isDesktopCollapsed ? 'justify-center px-0' : 'gap-3 px-3'} py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-card transition-colors`}
-          >
+          <button onClick={handleSignOut} title={isDesktopCollapsed ? "Sign Out" : undefined} className={`flex w-full items-center ${isDesktopCollapsed ? 'justify-center px-0' : 'gap-3 px-3'} py-2 rounded-lg text-muted-foreground hover:text-red-400 hover:bg-red-400/10 transition-colors`}>
             <LogOut size={20} className="shrink-0" />
             {!isDesktopCollapsed && <span className="font-medium text-sm whitespace-nowrap">Sign Out</span>}
           </button>
         </div>
       </aside>
 
-      {/* Mobile Sidebar Overlay Drawer */}
       {isSidebarOpen && (
         <div className="fixed inset-0 z-50 flex md:hidden bg-background/85 backdrop-blur-sm">
           <div className="w-64 bg-card border-r border-border flex flex-col h-full shadow-2xl animate-fade-in">
             <div className="h-16 flex items-center justify-between px-6 border-b border-border">
-              <Link href="/dashboard" className="font-syne text-primary text-2xl font-bold" onClick={() => setIsSidebarOpen(false)}>
-                NetK
+              <Link href="/admin" className="font-syne text-primary text-2xl font-bold" onClick={() => setIsSidebarOpen(false)}>
+                NetK Admin
               </Link>
               <button
                 onClick={() => setIsSidebarOpen(false)}
                 className="p-1 text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Close menu"
               >
                 <X size={24} />
               </button>
@@ -153,30 +140,22 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               </button>
             </div>
           </div>
-          {/* Backdrop area to close drawer */}
           <div className="flex-1" onClick={() => setIsSidebarOpen(false)} />
         </div>
       )}
 
-      {/* Main Content */}
       <main className="flex-1 flex flex-col h-screen overflow-hidden">
         <header className="h-16 border-b border-border flex items-center px-6 md:px-12 bg-background/80 backdrop-blur z-10 sticky top-0 justify-between">
           <div className="flex items-center gap-4">
             <button
               onClick={() => setIsSidebarOpen(true)}
               className="md:hidden p-1.5 text-muted-foreground hover:text-foreground transition-colors border border-border rounded-lg bg-card"
-              aria-label="Open menu"
             >
               <Menu size={20} />
             </button>
             <h2 className="font-syne font-semibold text-lg text-foreground capitalize">
-              {pathname.split('/').pop() || 'Dashboard'}
+              Admin Area
             </h2>
-          </div>
-          <div className="flex items-center gap-4">
-             <div className="w-8 h-8 rounded-full bg-card border border-border flex items-center justify-center">
-                <User size={16} className="text-muted-foreground" />
-             </div>
           </div>
         </header>
         <div className="flex-1 overflow-y-auto p-6 md:p-12">

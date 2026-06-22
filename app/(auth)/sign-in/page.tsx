@@ -40,7 +40,13 @@ function SignInForm() {
       const profile = profileRes.data;
       console.log('Profile fetched:', profile);
 
-      if (!profile.region) {
+      if (profile.role === 'admin') {
+        console.log('Pushing to /admin');
+        window.location.href = '/admin';
+      } else if (profile.role === 'employer') {
+        console.log('Pushing to /company');
+        window.location.href = '/company';
+      } else if (!profile.region) {
         console.log('Pushing to /onboarding');
         window.location.href = '/onboarding';
       } else if (!profile.ikigaiProfile) {

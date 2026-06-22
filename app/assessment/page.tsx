@@ -123,7 +123,7 @@ export default function AssessmentPage() {
       };
 
       await api.post('/assessment/submit', payload);
-      router.push('/dashboard');
+      router.push('/assessment/results');
     } catch {
       setError('Something went wrong. Please try again.');
     } finally {

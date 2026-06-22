@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import api from '@/lib/api';
+import Link from 'next/link';
 import { Briefcase, ArrowRight, MapPin, Tag } from 'lucide-react';
 
 export default function RolesPage() {
@@ -37,48 +38,49 @@ export default function RolesPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {roles.map((role) => (
-            <div
-              key={role.id}
-              className="bg-card border border-border hover:border-primary/50 rounded-2xl p-8 transition-all flex flex-col"
-            >
-              <div className="flex justify-between items-start mb-6">
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
-                  <Briefcase size={20} />
-                </div>
-                <span className="bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">
-                  {role.experienceLevel || 'Open Level'}
-                </span>
-              </div>
-
-              <h3 className="text-2xl font-bold font-syne mb-2 text-foreground">{role.title}</h3>
-
-              <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
-                {role.region && (
-                  <span className="flex items-center gap-1.5">
-                    <MapPin size={14} /> {role.region}
+            <Link href={`/roles/${role.id}`} key={role.id}>
+              <div
+                className="bg-card border border-border hover:border-primary/50 rounded-2xl p-8 transition-all flex flex-col h-full"
+              >
+                <div className="flex justify-between items-start mb-6">
+                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+                    <Briefcase size={20} />
+                  </div>
+                  <span className="bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">
+                    {role.experienceLevel || 'Open Level'}
                   </span>
-                )}
-              </div>
-
-              <p className="text-muted-foreground text-sm flex-1 mb-6 leading-relaxed line-clamp-3">
-                {role.description}
-              </p>
-
-              {role.tags?.length > 0 && (
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {role.tags.slice(0, 4).map((tag: string) => (
-                    <span key={tag} className="flex items-center gap-1 px-2.5 py-1 bg-[#21262D] text-muted-foreground text-[10px] font-bold uppercase tracking-wider rounded-md">
-                      <Tag size={10} /> {tag}
-                    </span>
-                  ))}
                 </div>
-              )}
 
-              <div className="flex items-center justify-between bg-background border border-border px-6 py-3 rounded-xl text-sm font-medium text-muted-foreground mt-auto">
-                Posted {new Date(role.createdAt).toLocaleDateString()}
-                <ArrowRight size={16} className="text-primary" />
+                <h3 className="text-2xl font-bold font-syne mb-2 text-foreground">{role.title}</h3>
+
+                <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
+                  {role.region && (
+                    <span className="flex items-center gap-1.5">
+                      <MapPin size={14} /> {role.region}
+                    </span>
+                  )}
+                </div>
+
+                <p className="text-muted-foreground text-sm flex-1 mb-6 leading-relaxed line-clamp-3">
+                  {role.description}
+                </p>
+
+                {role.tags?.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {role.tags.slice(0, 4).map((tag: string) => (
+                      <span key={tag} className="flex items-center gap-1 px-2.5 py-1 bg-[#21262D] text-muted-foreground text-[10px] font-bold uppercase tracking-wider rounded-md">
+                        <Tag size={10} /> {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                <div className="flex items-center justify-between bg-background border border-border px-6 py-3 rounded-xl text-sm font-medium text-muted-foreground mt-auto">
+                  Posted {new Date(role.createdAt).toLocaleDateString()}
+                  <ArrowRight size={16} className="text-primary" />
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}

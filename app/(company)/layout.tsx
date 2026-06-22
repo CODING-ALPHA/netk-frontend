@@ -2,13 +2,14 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Briefcase, Users, LayoutDashboard, Settings, LogOut, FileSearch, Menu, X } from 'lucide-react';
+import { Briefcase, Users, LayoutDashboard, Settings, LogOut, FileSearch, Menu, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import React from 'react';
 
 export default function CompanyLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
+  const [isDesktopCollapsed, setIsDesktopCollapsed] = React.useState(false);
 
   const handleSignOut = async () => {
     await fetch('/api/auth/logout', { method: 'POST' });
@@ -26,13 +27,22 @@ export default function CompanyLayout({ children }: { children: React.ReactNode 
   return (
     <div className="flex min-h-screen bg-background text-foreground font-sans relative">
       {/* Sidebar for Desktop */}
-      <aside className="w-64 border-r border-border hidden md:flex flex-col bg-card/50 shrink-0">
-        <div className="p-6 border-b border-border">
-          <Link href="/company" className="font-syne text-primary text-2xl font-bold flex items-center gap-2">
-            NetK <span className="bg-primary/10 text-primary text-[10px] uppercase tracking-wider px-2 py-0.5 rounded border border-primary/20 relative top-[-4px]">Employer</span>
-          </Link>
+      <aside className={`border-r border-border hidden md:flex flex-col bg-card/50 shrink-0 transition-all duration-300 ${isDesktopCollapsed ? 'w-20' : 'w-64'}`}>
+        <div className={`p-4 border-b border-border flex items-center ${isDesktopCollapsed ? 'justify-center flex-col py-3' : 'justify-between'}`}>
+          {!isDesktopCollapsed && (
+            <Link href="/company" className="font-syne text-primary text-2xl font-bold flex items-center gap-2">
+              NetK <span className="bg-primary/10 text-primary text-[10px] uppercase tracking-wider px-2 py-0.5 rounded border border-primary/20 relative top-[-4px]">Employer</span>
+            </Link>
+          )}
+          <button
+            onClick={() => setIsDesktopCollapsed(!isDesktopCollapsed)}
+            title={isDesktopCollapsed ? "Expand Menu" : "Collapse Menu"}
+            className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-[#21262D] transition-colors"
+          >
+            {isDesktopCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
+          </button>
         </div>
-        <nav className="flex-1 px-4 py-6 space-y-2">
+        <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto overflow-x-hidden">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href;
@@ -40,22 +50,23 @@ export default function CompanyLayout({ children }: { children: React.ReactNode 
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
+                title={isDesktopCollapsed ? item.name : undefined}
+                className={`flex items-center ${isDesktopCollapsed ? 'justify-center px-0' : 'gap-3 px-3'} py-2 rounded-lg transition-colors ${
                   isActive 
                     ? 'bg-primary/10 text-primary' 
                     : 'text-muted-foreground hover:text-foreground hover:bg-[#21262D]'
                 }`}
               >
-                <Icon size={20} />
-                <span className="font-medium text-sm">{item.name}</span>
+                <Icon size={20} className="shrink-0" />
+                {!isDesktopCollapsed && <span className="font-medium text-sm whitespace-nowrap">{item.name}</span>}
               </Link>
             );
           })}
         </nav>
-        <div className="p-4 border-t border-border">
-          <button onClick={handleSignOut} className="flex w-full items-center gap-3 px-3 py-2 rounded-lg text-muted-foreground hover:text-red-400 hover:bg-red-400/10 transition-colors">
-            <LogOut size={20} />
-            <span className="font-medium text-sm">Sign Out</span>
+        <div className="p-4 border-t border-border flex flex-col gap-2">
+          <button onClick={handleSignOut} title={isDesktopCollapsed ? "Sign Out" : undefined} className={`flex w-full items-center ${isDesktopCollapsed ? 'justify-center px-0' : 'gap-3 px-3'} py-2 rounded-lg text-muted-foreground hover:text-red-400 hover:bg-red-400/10 transition-colors`}>
+            <LogOut size={20} className="shrink-0" />
+            {!isDesktopCollapsed && <span className="font-medium text-sm whitespace-nowrap">Sign Out</span>}
           </button>
         </div>
       </aside>

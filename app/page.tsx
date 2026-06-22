@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
@@ -9,8 +10,11 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary/30 selection:text-primary">
       {/* Navigation */}
-      <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl z-50 border border-border/40 bg-background/80 backdrop-blur-xl transition-all duration-300">
-        <div className="px-6 w-full h-16 flex items-center justify-between">
+      <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-3rem)] max-w-[calc(80rem-3rem)] z-50">
+        {/* Nav Background */}
+        <div className={`absolute inset-0 bg-background/80 backdrop-blur-xl border border-border/40 transition-all duration-300 ${isMobileMenuOpen ? 'rounded-t-2xl border-b-0' : 'rounded-2xl'}`} />
+        
+        <div className="relative px-6 w-full h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-primary rounded flex items-center justify-center font-bold text-black text-lg">
               N
@@ -49,7 +53,7 @@ export default function LandingPage() {
 
         {/* Mobile Menu Dropdown */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-[calc(100%-1px)] left-[-1px] w-[calc(100%+2px)] bg-background/95 backdrop-blur-xl border-x border-b border-border/40 px-6 py-6 flex flex-col gap-4 shadow-xl">
+          <div className="md:hidden absolute top-full left-0 w-full bg-background/80 backdrop-blur-xl border-x border-b border-border/40 px-6 py-6 flex flex-col gap-4 shadow-2xl rounded-b-2xl -z-10">
             <Link href="#ikigai" className="text-sm font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-primary py-2" onClick={() => setIsMobileMenuOpen(false)}>Ikigai</Link>
             <Link href="#roadmap" className="text-sm font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-primary py-2" onClick={() => setIsMobileMenuOpen(false)}>Roadmap</Link>
             <Link href="#tasks" className="text-sm font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-primary py-2" onClick={() => setIsMobileMenuOpen(false)}>Proofs</Link>
@@ -132,9 +136,8 @@ export default function LandingPage() {
 
 
         {/* The Problem Section */}
-
-        {/* The Problem Section */}
-        <section className="py-24 bg-secondary/20">
+        <section className="py-24 bg-[#0a0a0a] border-t border-border/40 relative">
+          <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid md:grid-cols-2 gap-16 items-center">
               <div>
@@ -162,22 +165,13 @@ export default function LandingPage() {
                 </div>
               </div>
               <div className="bg-card border border-border p-2 rounded-[2rem] shadow-2xl overflow-hidden group">
-                <div className="aspect-[4/3] bg-background rounded-[1.5rem] relative flex items-center justify-center p-8 overflow-hidden">
-                   <div className="absolute inset-0 bg-primary opacity-5" />
-                   {/* Graphic suggesting a messy flowchart */}
-                   <svg className="w-full h-full text-muted-foreground opacity-20" viewBox="0 0 200 150">
-                     <path d="M20,20 Q100,20 180,20" stroke="currentColor" strokeWidth="2" fill="none" />
-                     <path d="M20,75 L180,20" stroke="currentColor" strokeWidth="2" fill="none" strokeDasharray="4 4" />
-                     <circle cx="20" cy="20" r="4" fill="currentColor" />
-                     <circle cx="180" cy="20" r="4" fill="currentColor" />
-                     <rect x="50" y="50" width="40" height="20" stroke="currentColor" strokeWidth="2" fill="none" />
-                     <path d="M100,100 L150,130" stroke="currentColor" strokeWidth="2" fill="none" />
-                   </svg>
-                   <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
-                      <div className="mb-4 p-4 rounded-2xl bg-destructive/10 text-destructive text-4xl">⚠️</div>
-                      <div className="text-xl font-bold mb-2 uppercase tracking-tighter">The Chaos Cycle</div>
-                      <div className="text-sm text-muted-foreground max-w-[200px]">Random courses, zero results.</div>
-                   </div>
+                <div className="aspect-[4/3] bg-background rounded-[1.5rem] relative flex items-center justify-center overflow-hidden">
+                  <Image
+                    src="/images/chaos_illustration.png"
+                    alt="The Chaos Cycle"
+                    fill
+                    className="object-cover transition-all duration-500 scale-100 group-hover:scale-105"
+                  />
                 </div>
               </div>
             </div>
@@ -185,7 +179,7 @@ export default function LandingPage() {
         </section>
 
         {/* The Ikigai Section */}
-        <section id="ikigai" className="py-24">
+        <section id="ikigai" className="py-24 bg-gradient-to-b from-background to-secondary/10 border-t border-border/40">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center max-w-3xl mx-auto mb-20">
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Built on Ikigai</h2>
@@ -195,23 +189,13 @@ export default function LandingPage() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="relative aspect-square flex items-center justify-center">
-                {/* Circle Diagram CSS visualization */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-[70%] -translate-y-[70%] w-[60%] h-[60%] rounded-full border border-primary/40 bg-primary/5 flex items-center justify-center text-center p-4">
-                  <span className="text-xs font-bold uppercase tracking-widest text-primary">Love</span>
-                </div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-[30%] -translate-y-[70%] w-[60%] h-[60%] rounded-full border border-blue-400/40 bg-blue-400/5 flex items-center justify-center text-center p-4">
-                  <span className="text-xs font-bold uppercase tracking-widest text-blue-400">Skills</span>
-                </div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-[70%] -translate-y-[30%] w-[60%] h-[60%] rounded-full border border-emerald-400/40 bg-emerald-400/5 flex items-center justify-center text-center p-4">
-                  <span className="text-xs font-bold uppercase tracking-widest text-emerald-400">Needs</span>
-                </div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-[30%] -translate-y-[30%] w-[60%] h-[60%] rounded-full border border-amber-400/40 bg-amber-400/5 flex items-center justify-center text-center p-4">
-                  <span className="text-xs font-bold uppercase tracking-widest text-amber-400">Paid</span>
-                </div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-primary rounded-full flex items-center justify-center shadow-2xl shadow-primary/50 text-black font-black text-xs uppercase z-10">
-                  IKIGAI
-                </div>
+              <div className="relative aspect-square flex items-center justify-center overflow-hidden rounded-[2.5rem] border border-border/40 shadow-2xl bg-card group/ikigai">
+                <Image
+                  src="/images/ikigai_diagram.png"
+                  alt="Ikigai Diagram"
+                  fill
+                  className="object-cover opacity-90 group-hover/ikigai:opacity-100 transition-all duration-500 scale-100 group-hover/ikigai:scale-105"
+                />
               </div>
 
               <div className="grid grid-cols-1 gap-6">
@@ -232,7 +216,8 @@ export default function LandingPage() {
         </section>
 
         {/* User Journey Section */}
-        <section id="roadmap" className="py-24 bg-secondary/10 border-y border-border/40">
+        <section id="roadmap" className="py-24 bg-[#111] border-y border-border/40 relative">
+          <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
           <div className="max-w-7xl mx-auto px-6">
             <h2 className="text-3xl font-bold tracking-tight mb-16 underline decoration-primary decoration-4 underline-offset-8">The Execution Pipeline</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border border-border/40 rounded-[2.5rem] overflow-hidden">
@@ -255,7 +240,7 @@ export default function LandingPage() {
         </section>
 
         {/* Features Bento Grid */}
-        <section id="tasks" className="py-24 overflow-hidden">
+        <section id="tasks" className="py-24 bg-background overflow-hidden border-b border-border/40">
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-12 gap-6 h-full">
               {/* Feature 1 */}
@@ -353,10 +338,11 @@ export default function LandingPage() {
         </section>
 
         {/* Final CTA */}
-        <section className="py-24 relative overflow-hidden">
-          <div className="absolute inset-0 bg-primary/5 pointer-events-none" />
-          <div className="max-w-4xl mx-auto px-6 text-center relative">
-            <h2 className="text-5xl md:text-6xl font-black mb-8 tracking-tighter">
+        <section className="py-32 relative overflow-hidden bg-[#050505] border-t border-border/40">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-primary/10 blur-[100px] rounded-full pointer-events-none" />
+          
+          <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <h2 className="text-5xl md:text-6xl font-black mb-8 tracking-tighter text-foreground">
               Stop guessing. <br/> Start building.
             </h2>
             <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
@@ -364,7 +350,7 @@ export default function LandingPage() {
             </p>
             <Link
               href="/onboarding"
-              className="inline-flex items-center gap-4 px-10 py-5 bg-primary text-black text-xl font-black rounded-full hover:bg-primary/90 transition-all shadow-2xl shadow-primary/30"
+              className="inline-flex items-center gap-4 px-10 py-5 bg-primary text-black text-xl font-black rounded-full hover:bg-primary/90 hover:scale-105 transition-all shadow-2xl shadow-primary/20"
             >
               Start Your Assessment
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
