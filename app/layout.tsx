@@ -32,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="light">
       <body
         className={`${syne.variable} ${outfit.variable} ${spaceGrotesk.variable} font-sans antialiased`}
       >

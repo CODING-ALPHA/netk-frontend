@@ -123,7 +123,7 @@ export default function PortfolioSettingsPage() {
             Claim a unique URL to share your portfolio with recruiters. Use letters, numbers, and hyphens only.
           </p>
           <div className="flex items-center">
-            <span className="bg-[#21262D] text-muted-foreground px-4 py-3 rounded-l-lg border border-r-0 border-border font-mono text-sm h-12 flex items-center">
+            <span className="bg-secondary text-muted-foreground px-4 py-3 rounded-l-lg border border-r-0 border-border font-mono text-sm h-12 flex items-center">
               net-k.com/portfolio/
             </span>
             <input
@@ -131,7 +131,7 @@ export default function PortfolioSettingsPage() {
               value={slug}
               onChange={(e) => setSlug(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ''))}
               placeholder="your-name"
-              className="flex-1 bg-background border border-border rounded-r-lg px-4 py-3 text-foreground font-mono text-sm placeholder-[#8B949E] focus:outline-none focus:border-primary transition-colors h-12"
+              className="flex-1 bg-background border border-border rounded-r-lg px-4 py-3 text-foreground font-mono text-sm placeholder-muted-foreground focus:outline-none focus:border-primary transition-colors h-12"
             />
           </div>
           {slug && visibility === 'public' && (

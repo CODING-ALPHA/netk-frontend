@@ -85,13 +85,13 @@ export default function TalentSearchPage() {
             <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">Min. Portfolio Items</label>
             <input type="number" min="0" value={filters.minArtifacts} onChange={(e) => setFilters((f) => ({ ...f, minArtifacts: e.target.value }))}
               placeholder="0"
-              className="w-full bg-background border border-border rounded-lg px-3 py-2.5 text-foreground text-sm placeholder-[#8B949E] focus:border-primary focus:outline-none transition-colors" />
+              className="w-full bg-background border border-border rounded-lg px-3 py-2.5 text-foreground text-sm placeholder-muted-foreground focus:border-primary focus:outline-none transition-colors" />
           </div>
           <div>
             <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">Min. Stages Completed</label>
             <input type="number" min="0" value={filters.minStagesCompleted} onChange={(e) => setFilters((f) => ({ ...f, minStagesCompleted: e.target.value }))}
               placeholder="0"
-              className="w-full bg-background border border-border rounded-lg px-3 py-2.5 text-foreground text-sm placeholder-[#8B949E] focus:border-primary focus:outline-none transition-colors" />
+              className="w-full bg-background border border-border rounded-lg px-3 py-2.5 text-foreground text-sm placeholder-muted-foreground focus:border-primary focus:outline-none transition-colors" />
           </div>
         </div>
         <button type="submit" disabled={searching}
@@ -135,7 +135,7 @@ export default function TalentSearchPage() {
                 {candidate.careerInterests?.length > 0 && (
                   <div className="flex flex-wrap gap-1.5">
                     {candidate.careerInterests.slice(0, 4).map((i: string) => (
-                      <span key={i} className="text-[10px] bg-[#21262D] text-muted-foreground px-2 py-0.5 rounded font-medium uppercase tracking-wider">{i}</span>
+                      <span key={i} className="text-[10px] bg-secondary text-muted-foreground border border-border px-2 py-0.5 rounded font-medium uppercase tracking-wider">{i}</span>
                     ))}
                   </div>
                 )}

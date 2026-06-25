@@ -128,7 +128,7 @@ export default function CreateRolePage() {
             value={formData.title}
             onChange={handleChange}
             placeholder="e.g. Senior Frontend Engineer"
-            className="w-full bg-background border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder-[#8B949E] focus:outline-none focus:border-primary"
+            className="w-full bg-background border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary"
           />
         </div>
 
@@ -140,7 +140,7 @@ export default function CreateRolePage() {
               value={formData.experienceLevel}
               onChange={handleChange}
               placeholder="e.g. Mid-Level, Senior"
-              className="w-full bg-background border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder-[#8B949E] focus:outline-none focus:border-primary"
+              className="w-full bg-background border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary"
             />
           </div>
           <div className="space-y-2">
@@ -150,7 +150,7 @@ export default function CreateRolePage() {
               value={formData.region}
               onChange={handleChange}
               placeholder="e.g. Remote, US, EMEA"
-              className="w-full bg-background border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder-[#8B949E] focus:outline-none focus:border-primary"
+              className="w-full bg-background border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary"
             />
           </div>
         </div>
@@ -162,7 +162,7 @@ export default function CreateRolePage() {
             value={formData.tags}
             onChange={handleChange}
             placeholder="e.g. React, Next.js, Typescript"
-            className="w-full bg-background border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder-[#8B949E] focus:outline-none focus:border-primary"
+            className="w-full bg-background border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary"
           />
         </div>
 
@@ -174,7 +174,7 @@ export default function CreateRolePage() {
             onChange={handleChange}
             placeholder="Detailed description of the role, responsibilities, and requirements..."
             rows={8}
-            className="w-full bg-background border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder-[#8B949E] focus:outline-none focus:border-primary resize-y"
+            className="w-full bg-background border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary resize-y"
           />
         </div>
 

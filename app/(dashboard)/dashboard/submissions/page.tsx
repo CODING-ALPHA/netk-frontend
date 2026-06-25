@@ -6,7 +6,7 @@ import { Package, Clock, CheckCircle2, XCircle, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 
 const STATUS_STYLES: Record<string, string> = {
-  submitted: 'bg-[#21262D] text-muted-foreground border-transparent',
+  submitted: 'bg-secondary text-muted-foreground border-border',
   under_review: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30',
   accepted: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
   rejected: 'bg-red-500/10 text-red-400 border-red-500/30',

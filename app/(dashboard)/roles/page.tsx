@@ -68,7 +68,7 @@ export default function RolesPage() {
                 {role.tags?.length > 0 && (
                   <div className="flex flex-wrap gap-2 mb-6">
                     {role.tags.slice(0, 4).map((tag: string) => (
-                      <span key={tag} className="flex items-center gap-1 px-2.5 py-1 bg-[#21262D] text-muted-foreground text-[10px] font-bold uppercase tracking-wider rounded-md">
+                      <span key={tag} className="flex items-center gap-1 px-2.5 py-1 bg-secondary text-muted-foreground text-[10px] font-bold uppercase tracking-wider rounded-md border border-border">
                         <Tag size={10} /> {tag}
                       </span>
                     ))}

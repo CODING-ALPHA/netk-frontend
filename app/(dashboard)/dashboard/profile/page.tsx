@@ -70,7 +70,7 @@ export default function ProfilePage() {
                 value={formData.firstName}
                 onChange={e => setFormData({...formData, firstName: e.target.value})}
                 placeholder="John"
-                className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-foreground placeholder-[#8B949E] focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_hsl(var(--primary)_/_0.1)] transition-all"
+                className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_hsl(var(--primary)_/_0.1)] transition-all"
               />
             </div>
             <div>
@@ -80,7 +80,7 @@ export default function ProfilePage() {
                 value={formData.lastName}
                 onChange={e => setFormData({...formData, lastName: e.target.value})}
                 placeholder="Doe"
-                className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-foreground placeholder-[#8B949E] focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_hsl(var(--primary)_/_0.1)] transition-all"
+                className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_hsl(var(--primary)_/_0.1)] transition-all"
               />
             </div>
           </div>
@@ -94,7 +94,7 @@ export default function ProfilePage() {
                 value={formData.region}
                 onChange={e => setFormData({...formData, region: e.target.value})}
                 placeholder="e.g. San Francisco, CA"
-                className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-foreground placeholder-[#8B949E] focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_hsl(var(--primary)_/_0.1)] transition-all"
+                className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_hsl(var(--primary)_/_0.1)] transition-all"
               />
           </div>
 
@@ -107,7 +107,7 @@ export default function ProfilePage() {
                onChange={e => setFormData({...formData, bio: e.target.value})}
                placeholder="Write a little about yourself..."
                rows={4}
-               className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground placeholder-[#8B949E] focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_hsl(var(--primary)_/_0.1)] transition-all resize-none"
+               className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_hsl(var(--primary)_/_0.1)] transition-all resize-none"
             />
           </div>
 

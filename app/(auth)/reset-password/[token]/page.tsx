@@ -79,7 +79,7 @@ export default function ResetPasswordPage() {
               onChange={(e) =>
                 setForm((f) => ({ ...f, newPassword: e.target.value }))
               }
-              className="w-full bg-background border border-border rounded-lg px-3.5 py-2.5 text-foreground text-sm outline-none focus:border-primary focus:shadow-[0_0_0_3px_hsl(var(--primary)_/_0.1)] transition-all placeholder-[#8B949E]"
+              className="w-full bg-background border border-border rounded-lg px-3.5 py-2.5 text-foreground text-sm outline-none focus:border-primary focus:shadow-[0_0_0_3px_hsl(var(--primary)_/_0.1)] transition-all placeholder-muted-foreground"
               placeholder="Minimum 8 characters"
             />
             {errors.newPassword && (
@@ -99,7 +99,7 @@ export default function ResetPasswordPage() {
               onChange={(e) =>
                 setForm((f) => ({ ...f, confirmPassword: e.target.value }))
               }
-              className="w-full bg-background border border-border rounded-lg px-3.5 py-2.5 text-foreground text-sm outline-none focus:border-primary focus:shadow-[0_0_0_3px_hsl(var(--primary)_/_0.1)] transition-all placeholder-[#8B949E]"
+              className="w-full bg-background border border-border rounded-lg px-3.5 py-2.5 text-foreground text-sm outline-none focus:border-primary focus:shadow-[0_0_0_3px_hsl(var(--primary)_/_0.1)] transition-all placeholder-muted-foreground"
               placeholder="Repeat your new password"
             />
             {errors.confirmPassword && (

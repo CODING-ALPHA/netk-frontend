@@ -146,7 +146,7 @@ export default function StagePage() {
           {tasks.map((task) => {
             const sub = submissions[task.id];
             const STATUS_STYLE: Record<string, string> = {
-              submitted: 'bg-[#21262D] text-muted-foreground border-transparent',
+              submitted: 'bg-secondary text-muted-foreground border-border',
               under_review: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30',
               accepted: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
               rejected: 'bg-red-500/10 text-red-400 border-red-500/30',
@@ -226,7 +226,7 @@ export default function StagePage() {
                           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Suggested Tools</p>
                           <div className="flex flex-wrap gap-1.5">
                             {task.suggestedTools.map((t) => (
-                              <span key={t} className="px-2.5 py-0.5 bg-[#21262D] text-foreground rounded-md text-[10px] font-bold uppercase tracking-wider border border-border">
+                              <span key={t} className="px-2.5 py-0.5 bg-secondary text-foreground rounded-md text-[10px] font-bold uppercase tracking-wider border border-border">
                                 {t}
                               </span>
                             ))}
@@ -260,7 +260,7 @@ export default function StagePage() {
                             value={form.textResponse}
                             onChange={(e) => setForm((f) => ({ ...f, textResponse: e.target.value }))}
                             placeholder="Describe what you built, what you learned, and how you met the criteria…"
-                            className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground text-sm placeholder-[#8B949E] focus:outline-none focus:border-primary transition-colors resize-none"
+                            className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground text-sm placeholder-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none"
                           />
                         </div>
                         <div>
@@ -272,14 +272,14 @@ export default function StagePage() {
                               onChange={(e) => setLinkInput(e.target.value)}
                               onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addLink())}
                               placeholder="https://github.com/your/project"
-                              className="flex-1 bg-background border border-border rounded-lg px-4 py-2.5 text-foreground text-sm placeholder-[#8B949E] focus:outline-none focus:border-primary transition-colors"
+                              className="flex-1 bg-background border border-border rounded-lg px-4 py-2.5 text-foreground text-sm placeholder-muted-foreground focus:outline-none focus:border-primary transition-colors"
                             />
-                            <button type="button" onClick={addLink} className="bg-[#21262D] hover:bg-[#30363D] text-foreground px-4 py-2.5 rounded-lg transition-colors">
+                            <button type="button" onClick={addLink} className="bg-secondary hover:bg-secondary/80 text-foreground px-4 py-2.5 rounded-lg border border-border transition-colors">
                               <Plus size={16} />
                             </button>
                           </div>
                           {form.evidenceLinks.map((link, i) => (
-                            <div key={i} className="flex items-center gap-2 bg-[#21262D] rounded-lg px-3 py-2 mb-1.5">
+                            <div key={i} className="flex items-center gap-2 bg-secondary border border-border rounded-lg px-3 py-2 mb-1.5">
                               <span className="text-sm text-foreground flex-1 truncate">{link}</span>
                               <button onClick={() => setForm((f) => ({ ...f, evidenceLinks: f.evidenceLinks.filter((_, j) => j !== i) }))} className="text-muted-foreground hover:text-[#F85149] transition-colors">
                                 <X size={14} />

@@ -12,17 +12,17 @@ export default function LandingPage() {
       {/* Navigation */}
       <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-3rem)] max-w-[calc(80rem-3rem)] z-50">
         {/* Nav Background */}
-        <div className={`absolute inset-0 bg-background/80 backdrop-blur-xl border border-border/40 transition-all duration-300 ${isMobileMenuOpen ? 'rounded-t-2xl border-b-0' : 'rounded-2xl'}`} />
+        <div className={`absolute inset-0 bg-black/80 backdrop-blur-xl border border-white/10 transition-all duration-300 ${isMobileMenuOpen ? 'rounded-t-2xl border-b-0' : 'rounded-2xl'}`} />
         
         <div className="relative px-6 w-full h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-primary rounded flex items-center justify-center font-bold text-black text-lg">
               N
             </div>
-            <span className="text-lg font-black uppercase tracking-tighter">NetK</span>
+            <span className="text-lg font-black uppercase tracking-tighter text-white">NetK</span>
           </div>
 
-          <div className="hidden md:flex items-center gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
+          <div className="hidden md:flex items-center gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400">
             <Link href="#ikigai" className="hover:text-primary transition-colors">Ikigai</Link>
             <Link href="#roadmap" className="hover:text-primary transition-colors">Roadmap</Link>
             <Link href="#tasks" className="hover:text-primary transition-colors">Proofs</Link>
@@ -32,7 +32,7 @@ export default function LandingPage() {
           <div className="hidden md:flex items-center gap-6">
             <Link
               href="/onboarding"
-              className="px-5 py-2.5 bg-white text-black text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-primary transition-all active:scale-95 shadow-2xl flex items-center gap-2"
+              className="px-5 py-2.5 bg-foreground text-background text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-primary hover:text-black transition-all active:scale-95 shadow-2xl flex items-center gap-2"
             >
               Get Started
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -43,7 +43,7 @@ export default function LandingPage() {
 
           {/* Mobile Menu Toggle */}
           <button 
-            className="md:hidden p-2 text-foreground"
+            className="md:hidden p-2 text-white"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -53,16 +53,16 @@ export default function LandingPage() {
 
         {/* Mobile Menu Dropdown */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full bg-background/80 backdrop-blur-xl border-x border-b border-border/40 px-6 py-6 flex flex-col gap-4 shadow-2xl rounded-b-2xl -z-10">
-            <Link href="#ikigai" className="text-sm font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-primary py-2" onClick={() => setIsMobileMenuOpen(false)}>Ikigai</Link>
-            <Link href="#roadmap" className="text-sm font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-primary py-2" onClick={() => setIsMobileMenuOpen(false)}>Roadmap</Link>
-            <Link href="#tasks" className="text-sm font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-primary py-2" onClick={() => setIsMobileMenuOpen(false)}>Proofs</Link>
-            <Link href="#hiring" className="text-sm font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-primary py-2" onClick={() => setIsMobileMenuOpen(false)}>Hiring</Link>
-            <div className="pt-4 border-t border-border/40">
+          <div className="md:hidden absolute top-full left-0 w-full bg-zinc-950/90 backdrop-blur-xl border-x border-b border-zinc-800 px-6 py-6 flex flex-col gap-4 shadow-2xl rounded-b-2xl -z-10">
+            <Link href="#ikigai" className="text-sm font-black uppercase tracking-[0.2em] text-zinc-400 hover:text-white py-2" onClick={() => setIsMobileMenuOpen(false)}>Ikigai</Link>
+            <Link href="#roadmap" className="text-sm font-black uppercase tracking-[0.2em] text-zinc-400 hover:text-white py-2" onClick={() => setIsMobileMenuOpen(false)}>Roadmap</Link>
+            <Link href="#tasks" className="text-sm font-black uppercase tracking-[0.2em] text-zinc-400 hover:text-white py-2" onClick={() => setIsMobileMenuOpen(false)}>Proofs</Link>
+            <Link href="#hiring" className="text-sm font-black uppercase tracking-[0.2em] text-zinc-400 hover:text-white py-2" onClick={() => setIsMobileMenuOpen(false)}>Hiring</Link>
+            <div className="pt-4 border-t border-zinc-800">
               <Link
                 href="/onboarding"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full px-6 py-3 bg-white text-black text-xs font-black uppercase tracking-widest rounded-full hover:bg-primary transition-all shadow-2xl flex items-center justify-center gap-2"
+                className="w-full px-6 py-3 bg-foreground text-background text-xs font-black uppercase tracking-widest rounded-full hover:bg-primary hover:text-black transition-all shadow-2xl flex items-center justify-center gap-2"
               >
                 Get Started
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -87,12 +87,12 @@ export default function LandingPage() {
           
           {/* Hero Content */}
           <section className="relative px-8 md:px-[8%] pt-32 pb-24 z-20 w-full">
-            <h1 className="text-[clamp(2.5rem,5vw,5.5rem)] font-black uppercase tracking-tighter mb-8 leading-[0.9]">
+            <h1 className="text-[clamp(2.5rem,5vw,5.5rem)] font-black uppercase tracking-tighter mb-8 leading-[0.9] text-white">
               Moving Careers <br/>
               <span className="text-white">Forward</span>
             </h1>
 
-            <p className="text-base md:text-lg text-muted-foreground max-w-lg font-medium leading-relaxed mb-12">
+            <p className="text-base md:text-lg text-zinc-300 max-w-lg font-medium leading-relaxed mb-12">
               NetK builds evidence-driven career systems, unifying discovery, roadmapping, and proof-of-work into a single evolving execution.
             </p>
 
@@ -108,7 +108,7 @@ export default function LandingPage() {
               </Link>
               <Link
                 href="#ikigai"
-                className="px-8 py-4 bg-[#111] border border-border/40 text-white text-xs font-black uppercase tracking-widest rounded-sm hover:bg-white hover:text-black transition-all flex items-center gap-3"
+                className="px-8 py-4 bg-white/10 border border-white/20 text-white text-xs font-black uppercase tracking-widest rounded-sm hover:bg-white hover:text-black transition-all flex items-center gap-3"
               >
                 Get a Quote
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -120,23 +120,23 @@ export default function LandingPage() {
 
           {/* Hero Footer Meta */}
           <div className="absolute bottom-10 left-8 md:left-[8%] right-8 md:right-[8%] flex justify-between items-end z-20 w-auto">
-             <div className="flex flex-col gap-4">
-               <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground w-max cursor-pointer group">
+              <div className="flex flex-col gap-4">
+               <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 w-max cursor-pointer group">
                   <span className="group-hover:text-primary transition-colors">Scroll for more</span>
                   <svg className="w-4 h-4 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                   </svg>
                </div>
-             </div>
-             <div className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground opacity-50">
-               Est. in 2026
-             </div>
+              </div>
+              <div className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">
+                Est. in 2026
+              </div>
           </div>
         </div>
 
 
         {/* The Problem Section */}
-        <section className="py-24 bg-[#0a0a0a] border-t border-border/40 relative">
+        <section className="py-24 bg-secondary/30 border-t border-border/40 relative">
           <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -216,7 +216,7 @@ export default function LandingPage() {
         </section>
 
         {/* User Journey Section */}
-        <section id="roadmap" className="py-24 bg-[#111] border-y border-border/40 relative">
+        <section id="roadmap" className="py-24 bg-secondary/40 border-y border-border/40 relative">
           <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
           <div className="max-w-7xl mx-auto px-6">
             <h2 className="text-3xl font-bold tracking-tight mb-16 underline decoration-primary decoration-4 underline-offset-8">The Execution Pipeline</h2>
@@ -299,7 +299,7 @@ export default function LandingPage() {
                   <p className="text-muted-foreground mb-6">
                     Companies search by verified artifacts, not just job titles. Your proof-of-work surfaces you directly to recruitment teams.
                   </p>
-                  <button className="px-6 py-3 bg-white text-black font-bold rounded-2xl hover:bg-white/90 transition-all text-sm uppercase">
+                  <button className="px-6 py-3 bg-foreground text-background font-bold rounded-2xl hover:bg-primary hover:text-black transition-all text-sm uppercase">
                     Register as Company
                   </button>
                 </div>
@@ -338,7 +338,7 @@ export default function LandingPage() {
         </section>
 
         {/* Final CTA */}
-        <section className="py-32 relative overflow-hidden bg-[#050505] border-t border-border/40">
+        <section className="py-32 relative overflow-hidden bg-secondary/30 border-t border-border/40">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-primary/10 blur-[100px] rounded-full pointer-events-none" />
           
           <div className="max-w-4xl mx-auto px-6 text-center relative z-10">

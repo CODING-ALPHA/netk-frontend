@@ -124,7 +124,7 @@ export default function AdminDashboardPage() {
                   value={reviewForm[sub.id]?.notes || ''}
                   onChange={(e) => setReviewForm(prev => ({ ...prev, [sub.id]: { ...prev[sub.id], notes: e.target.value } }))}
                   placeholder="Provide constructive feedback (required for rejection, optional for approval)..."
-                  className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder-[#8B949E] focus:outline-none focus:border-primary resize-y mb-4"
+                  className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary resize-y mb-4"
                   rows={3}
                 />
                 

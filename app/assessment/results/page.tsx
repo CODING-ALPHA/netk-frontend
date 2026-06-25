@@ -107,7 +107,7 @@ export default function AssessmentResultsPage() {
                   </div>
                   <Link
                     href={`/paths/${pathSlug}`}
-                    className="shrink-0 flex items-center justify-center gap-2 bg-[#21262D] text-foreground border border-border px-6 py-3 rounded-xl font-semibold hover:bg-[#30363D] transition-colors"
+                    className="shrink-0 flex items-center justify-center gap-2 bg-secondary text-foreground border border-border px-6 py-3 rounded-xl font-semibold hover:bg-secondary/80 transition-colors"
                   >
                     View Roadmap
                   </Link>

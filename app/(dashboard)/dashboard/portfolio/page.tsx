@@ -66,13 +66,13 @@ export default function PortfolioSettingsPage() {
            <div className="flex bg-background p-1 rounded-lg border border-border w-full mt-4">
               <button 
                  onClick={() => updateVisibility('public')}
-                 className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-md text-sm font-medium transition-colors ${visibility === 'public' ? 'bg-[#21262D] text-primary shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
+                 className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-md text-sm font-medium transition-colors ${visibility === 'public' ? 'bg-secondary text-primary border border-border/50 shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
               >
                  <Eye size={16} /> Public
               </button>
               <button 
                  onClick={() => updateVisibility('private')}
-                 className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-md text-sm font-medium transition-colors ${visibility === 'private' ? 'bg-[#21262D] text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
+                 className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-md text-sm font-medium transition-colors ${visibility === 'private' ? 'bg-secondary text-foreground border border-border/50 shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
               >
                  <EyeOff size={16} /> Private
               </button>
@@ -97,7 +97,7 @@ export default function PortfolioSettingsPage() {
                        value={slugForm}
                        onChange={e => setSlugForm(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ''))}
                        placeholder="yourname"
-                       className="flex-1 bg-card px-4 py-2.5 outline-none text-foreground placeholder-[#8B949E]"
+                       className="flex-1 bg-card px-4 py-2.5 outline-none text-foreground placeholder-muted-foreground"
                     />
                  </div>
               </div>

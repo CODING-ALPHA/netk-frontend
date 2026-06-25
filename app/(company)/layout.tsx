@@ -37,7 +37,7 @@ export default function CompanyLayout({ children }: { children: React.ReactNode 
           <button
             onClick={() => setIsDesktopCollapsed(!isDesktopCollapsed)}
             title={isDesktopCollapsed ? "Expand Menu" : "Collapse Menu"}
-            className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-[#21262D] transition-colors"
+            className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
           >
             {isDesktopCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
           </button>
@@ -54,7 +54,7 @@ export default function CompanyLayout({ children }: { children: React.ReactNode 
                 className={`flex items-center ${isDesktopCollapsed ? 'justify-center px-0' : 'gap-3 px-3'} py-2 rounded-lg transition-colors ${
                   isActive 
                     ? 'bg-primary/10 text-primary' 
-                    : 'text-muted-foreground hover:text-foreground hover:bg-[#21262D]'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
                 }`}
               >
                 <Icon size={20} className="shrink-0" />
@@ -99,7 +99,7 @@ export default function CompanyLayout({ children }: { children: React.ReactNode 
                     className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
                       isActive 
                         ? 'bg-primary/10 text-primary border border-primary/20' 
-                        : 'text-muted-foreground hover:text-foreground hover:bg-[#21262D]'
+                        : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
                     }`}
                   >
                     <Icon size={20} />

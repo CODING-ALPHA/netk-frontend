@@ -70,7 +70,7 @@ export default function CompanyDashboardPage() {
               value={(form as any)[key]}
               onChange={(e) => setForm((f) => ({ ...f, [key]: e.target.value }))}
               placeholder={placeholder}
-              className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-foreground placeholder-[#8B949E] focus:border-primary focus:outline-none transition-colors"
+              className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-foreground placeholder-muted-foreground focus:border-primary focus:outline-none transition-colors"
             />
           </div>
         ))}
@@ -81,7 +81,7 @@ export default function CompanyDashboardPage() {
             value={form.description}
             onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
             placeholder="What does your company do?"
-            className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground placeholder-[#8B949E] focus:border-primary focus:outline-none transition-colors resize-none"
+            className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground placeholder-muted-foreground focus:border-primary focus:outline-none transition-colors resize-none"
           />
         </div>
         <button type="submit" disabled={creating} className="w-full bg-primary text-black font-medium py-3 rounded-lg hover:bg-primary/90 disabled:opacity-50 transition-colors">
@@ -133,7 +133,7 @@ export default function CompanyDashboardPage() {
         <div className="bg-card border border-border rounded-xl p-8 flex flex-col gap-4">
           <h2 className="text-xl font-syne font-bold">Find Your Next Hire</h2>
           <p className="text-muted-foreground flex-1">Search candidates who have completed verified stages matching your requirements.</p>
-          <Link href="/company/talent" className="inline-flex items-center gap-2 bg-[#21262D] text-foreground hover:border-primary border border-border px-6 py-3 rounded-lg font-medium transition-colors w-fit">
+          <Link href="/company/talent" className="inline-flex items-center gap-2 bg-secondary text-foreground hover:bg-secondary/80 border border-border px-6 py-3 rounded-lg font-medium transition-colors w-fit">
             Search Talent <ArrowRight size={18} />
           </Link>
         </div>

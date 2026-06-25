@@ -160,7 +160,7 @@ export default function AssessmentPage() {
                         ? 'bg-primary text-black'
                         : done
                         ? 'bg-primary/20 text-primary'
-                        : 'bg-[#21262D] text-muted-foreground'
+                        : 'bg-secondary text-muted-foreground'
                     }`}
                   >
                     {done ? '✓' : step.n}
@@ -202,7 +202,7 @@ export default function AssessmentPage() {
               <div
                 key={i}
                 className={`h-1 rounded-full flex-1 transition-all ${
-                  i <= currentSection ? 'bg-primary' : 'bg-[#21262D]'
+                  i <= currentSection ? 'bg-primary' : 'bg-secondary'
                 }`}
               />
             ))}

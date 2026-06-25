@@ -78,7 +78,7 @@ export default function CompanySettingsPage() {
           </label>
           <input required value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
             placeholder="Acme Corp"
-            className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-foreground placeholder-[#8B949E] focus:border-primary focus:outline-none transition-colors" />
+            className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-foreground placeholder-muted-foreground focus:border-primary focus:outline-none transition-colors" />
         </div>
 
         <div>
@@ -87,7 +87,7 @@ export default function CompanySettingsPage() {
           </label>
           <input value={form.website} onChange={(e) => setForm((f) => ({ ...f, website: e.target.value }))}
             placeholder="https://yourcompany.com"
-            className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-foreground placeholder-[#8B949E] focus:border-primary focus:outline-none transition-colors" />
+            className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-foreground placeholder-muted-foreground focus:border-primary focus:outline-none transition-colors" />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -117,7 +117,7 @@ export default function CompanySettingsPage() {
           <label className="block text-sm font-medium text-muted-foreground mb-2">Description</label>
           <textarea required rows={4} value={form.description} onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
             placeholder="What does your company do? What are you building?"
-            className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground placeholder-[#8B949E] focus:border-primary focus:outline-none transition-colors resize-none" />
+            className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground placeholder-muted-foreground focus:border-primary focus:outline-none transition-colors resize-none" />
         </div>
 
         <div className="pt-2 flex justify-end">

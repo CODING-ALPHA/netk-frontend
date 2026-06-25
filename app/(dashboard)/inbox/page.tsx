@@ -103,7 +103,7 @@ export default function InboxPage() {
                   </button>
                   <button
                     onClick={() => handleRespond(req.id, 'declined')}
-                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-[#21262D] text-muted-foreground hover:text-foreground hover:bg-[#30363D] border border-border px-6 py-2.5 rounded-lg transition-all"
+                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80 border border-border px-6 py-2.5 rounded-lg transition-all"
                   >
                     <XCircle size={16} /> Decline
                   </button>

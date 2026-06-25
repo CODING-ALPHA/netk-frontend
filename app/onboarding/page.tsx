@@ -145,7 +145,7 @@ export default function OnboardingPage() {
                     className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
                       active
                         ? 'bg-primary text-black'
-                        : 'bg-[#21262D] text-muted-foreground'
+                        : 'bg-secondary text-muted-foreground'
                     }`}
                   >
                     {step.n}
@@ -278,7 +278,7 @@ export default function OnboardingPage() {
                 {form.careerInterests.map((tag) => (
                   <span
                     key={tag}
-                    className="flex items-center gap-1.5 bg-[#21262D] text-foreground text-xs rounded-md px-2.5 py-1"
+                    className="flex items-center gap-1.5 bg-secondary text-foreground text-xs rounded-md px-2.5 py-1 border border-border"
                   >
                     {tag}
                     <button
@@ -299,7 +299,7 @@ export default function OnboardingPage() {
                   onBlur={() => {
                     if (tagInput.trim()) addTag(tagInput);
                   }}
-                  className="flex-1 min-w-[160px] bg-transparent text-foreground text-sm outline-none placeholder-[#8B949E]"
+                  className="flex-1 min-w-[160px] bg-transparent text-foreground text-sm outline-none placeholder-muted-foreground"
                   placeholder={
                     form.careerInterests.length === 0
                       ? 'e.g. Design, Technology, Writing'

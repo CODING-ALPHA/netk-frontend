@@ -138,7 +138,7 @@ export default function RoleDetailPage() {
               <h3 className="text-lg font-bold text-foreground mb-4">Required Skills</h3>
               <div className="flex flex-wrap gap-2">
                 {role.tags.map((tag: string) => (
-                  <span key={tag} className="flex items-center gap-1.5 px-3 py-1.5 bg-[#21262D] text-foreground text-xs font-bold uppercase tracking-wider rounded-lg border border-border">
+                  <span key={tag} className="flex items-center gap-1.5 px-3 py-1.5 bg-secondary text-foreground text-xs font-bold uppercase tracking-wider rounded-lg border border-border">
                     <Tag size={12} className="text-primary" /> {tag}
                   </span>
                 ))}

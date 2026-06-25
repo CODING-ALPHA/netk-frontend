@@ -9,7 +9,7 @@ const REGIONS = ['West Africa', 'East Africa', 'Europe', 'North America', 'South
 const PATH_SLUGS = ['product-design', 'frontend-engineering', 'data-analysis', 'product-management', 'content-strategy'];
 
 const STATUS_STYLE: Record<string, string> = {
-  draft: 'bg-[#21262D] text-muted-foreground',
+  draft: 'bg-secondary text-muted-foreground border border-border',
   open: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
   closed: 'bg-red-500/10 text-red-400 border-red-500/30',
 };
@@ -108,13 +108,13 @@ export default function CompanyRolesPage() {
             <label className="block text-sm font-medium text-muted-foreground mb-2">Job Title</label>
             <input required value={form.title} onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
               placeholder="e.g. Junior Frontend Engineer"
-              className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-foreground placeholder-[#8B949E] focus:border-primary focus:outline-none transition-colors" />
+              className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-foreground placeholder-muted-foreground focus:border-primary focus:outline-none transition-colors" />
           </div>
           <div>
             <label className="block text-sm font-medium text-muted-foreground mb-2">Description</label>
             <textarea required rows={4} value={form.description} onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
               placeholder="Describe the role, responsibilities, and what you're looking for…"
-              className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground placeholder-[#8B949E] focus:border-primary focus:outline-none transition-colors resize-none" />
+              className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground placeholder-muted-foreground focus:border-primary focus:outline-none transition-colors resize-none" />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
@@ -140,12 +140,12 @@ export default function CompanyRolesPage() {
               <input value={tagInput} onChange={(e) => setTagInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
                 placeholder="e.g. React, TypeScript"
-                className="flex-1 bg-background border border-border rounded-lg px-4 py-2.5 text-foreground placeholder-[#8B949E] focus:border-primary focus:outline-none transition-colors" />
-              <button type="button" onClick={addTag} className="bg-[#21262D] px-4 py-2.5 rounded-lg hover:bg-[#30363D] transition-colors"><Plus size={16} /></button>
+                className="flex-1 bg-background border border-border rounded-lg px-4 py-2.5 text-foreground placeholder-muted-foreground focus:border-primary focus:outline-none transition-colors" />
+              <button type="button" onClick={addTag} className="bg-secondary px-4 py-2.5 rounded-lg border border-border hover:bg-secondary/80 transition-colors"><Plus size={16}/></button>
             </div>
             <div className="flex flex-wrap gap-2">
               {form.tags.map((tag) => (
-                <span key={tag} className="flex items-center gap-1.5 bg-[#21262D] text-foreground text-xs rounded-md px-2.5 py-1">
+                <span key={tag} className="flex items-center gap-1.5 bg-secondary text-foreground text-xs rounded-md px-2.5 py-1 border border-border">
                   {tag}
                   <button type="button" onClick={() => setForm((f) => ({ ...f, tags: f.tags.filter((t) => t !== tag) }))} className="text-muted-foreground hover:text-[#F85149]"><X size={12} /></button>
                 </span>
@@ -159,7 +159,7 @@ export default function CompanyRolesPage() {
                 const selected = form.pathSlugs.includes(slug);
                 return (
                   <button type="button" key={slug} onClick={() => togglePath(slug)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${selected ? 'bg-primary/10 text-primary border-primary/30' : 'bg-[#21262D] text-muted-foreground border-transparent hover:border-[#8B949E]'}`}>
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${selected ? 'bg-primary/10 text-primary border-primary/30' : 'bg-secondary text-muted-foreground border-border hover:border-muted-foreground'}`}>
                     {slug.replace(/-/g, ' ')}
                   </button>
                 );
@@ -196,9 +196,9 @@ export default function CompanyRolesPage() {
                 </div>
                 <p className="text-muted-foreground text-sm line-clamp-2 mb-3">{role.description}</p>
                 <div className="flex flex-wrap gap-2">
-                  {role.region && <span className="text-xs bg-[#21262D] text-muted-foreground px-2.5 py-1 rounded-md flex items-center gap-1"><Globe size={10} />{role.region}</span>}
-                  {role.experienceLevel && <span className="text-xs bg-[#21262D] text-muted-foreground px-2.5 py-1 rounded-md">{role.experienceLevel}</span>}
-                  {role.tags?.slice(0, 3).map((t: string) => <span key={t} className="text-xs bg-[#21262D] text-muted-foreground px-2.5 py-1 rounded-md">{t}</span>)}
+                  {role.region && <span className="text-xs bg-secondary text-muted-foreground border border-border px-2.5 py-1 rounded-md flex items-center gap-1"><Globe size={10} />{role.region}</span>}
+                  {role.experienceLevel && <span className="text-xs bg-secondary text-muted-foreground border border-border px-2.5 py-1 rounded-md">{role.experienceLevel}</span>}
+                  {role.tags?.slice(0, 3).map((t: string) => <span key={t} className="text-xs bg-secondary text-muted-foreground border border-border px-2.5 py-1 rounded-md">{t}</span>)}
                 </div>
               </div>
               <div className="flex gap-2 shrink-0">
